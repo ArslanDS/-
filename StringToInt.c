@@ -2,7 +2,7 @@
 #include <stdbool.h>
 
 
-int TryParse(char num[], bool *success)
+int Parse(char num[], bool &success)
 {
     int i, number = 0;
     for (i = 0; num[i]; i++)
@@ -28,7 +28,7 @@ int main()
     char num[20];
     scanf("%s", num);
 
-    number = TryParse(num, &succes);
+    number = Parse(num, &succes);
 
     if (succes)
     {
