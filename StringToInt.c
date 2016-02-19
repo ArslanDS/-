@@ -1,42 +1,34 @@
 #include <stdio.h>
-#include <stdbool.h>
+#include <string.h>
 
+int intParser(char str[], bool &s){
+    int result = 0;
+    int deg = 1;
+    s = false;
 
-int Parse(char num[], bool &success)
-{
-    int i, number = 0;
-    for (i = 0; num[i]; i++)
-    {
-        if ((num[i] >= '0') && (num[i] <= '9'))
-        {
-            number = number * 10 + num[i] - '0';
-        }
-        else
-        {
-            *success = false;
+    for(int i = 0; i < strlen(str) - 1; i++) {
+        deg *= 10;
+    }
+
+    for(int i = 0; i < strlen(str); i++) {
+        if((str[i] < '0')||
+                (str[i] > '9')){
             return -1;
         }
+        int intChr = str[i] - '0';
+        result += intChr * deg;
+        deg = deg/10;
     }
-    *success = true;
-    return number;
+    s = true;
+    return result;
 }
 
-int main()
-{
-    bool succes;
-    int number;
-    char num[20];
-    scanf("%s", num);
 
-    number = Parse(num, &succes);
+int main() {
+    bool b;
+    int n = intParser("1245", b);
+    printf("%d %d", n, b);
 
-    if (succes)
-    {
-        printf("Your number: %d", number);
-    }
-    else
-    {
-        printf("You haven't entered the number!");
-    }
+
     return 0;
 }
